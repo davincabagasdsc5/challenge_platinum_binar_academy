@@ -1,0 +1,34 @@
+<!doctype html>
+<title>Predict Your Sentiment File Text Using LSTM Model</title>
+<h1>Upload, Clean it, Predict Using LSTM Model, Save to your directory</h1>
+<form method=post enctype=multipart/form-data>
+  <input type=file name=file>
+  <br>
+  <br>
+  File must be in (.csv) format, with spesifications below :
+  <br>
+  <br>
+  Header/Columns Name :
+  <br>
+  <br>
+  ['tweets'] == object
+  <br>
+  <br>
+  ['labels'] == string/object
+  <br>
+  <br>
+  <br>
+  Type your path directory without (" ") here to save downloaded file:
+  <input type="text" name="directory_path">
+  <br><br>
+  <input type=submit value=Upload>
+</form>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
