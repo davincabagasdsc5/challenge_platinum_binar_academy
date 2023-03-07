@@ -1,5 +1,4 @@
 # Importing Library
-import sqlite3
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template, Markup, jsonify
 from werkzeug.utils import secure_filename
