@@ -1,0 +1,86 @@
+## Menggunakan Tokenizer
+
+1. read data csv
+2. cek data, apakah di data train, labelnya imbalance? kalau iya, lakukan oversampling (library : imblearn atau SMOTE)
+3. Ubah label menjadi angka (0 : positive, 1 : neutral, 2 : negative)
+4. cleansing data teks (kolom tweets)
+5. Split data train
+6. Convert data teks menjadi numerikal (bisa pakai TfidfVectorizer)
+7. Lakukan .fit_transform pada data teks pada train data
+8. Lakukan .transform pada data test
+9. Build the model
+
+model = Sequential()
+
+Tambahkan Hidden Layer pada model :
+model.add(Dense.....)
+model.add(Dropout(....))
+model.add(Dense(...))
+model.add(Dropout(...))
+model.add(Dense(....))
+
+model.compile()
+
+Convert label data train menggunakan to_categorical
+Convert label data test menggunakan to_categorical
+
+Pakai EarlyStopping untuk stop ketika val_loss meningkat :
+
+from keras.callbacks import EarlyStopping
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=1)
+
+latih data train:
+
+model.fit(......)
+
+test_loss, test_acc = model.evaluate(test_features, test_label)
+
+
+
+## Menggunakan tfidf
+
+1. read data csv
+2. cek data, apakah di data train, labelnya imbalance? kalau iya, lakukan oversampling (library : imblearn atau SMOTE)
+3. Ubah label menjadi angka (0 : positive, 1 : neutral, 2 : negative)
+4. cleansing data teks (kolom tweets)
+5. Split data train
+6. Convert data teks menjadi numerikal (bisa pakai Tokenizer)
+7. Lakukan .fit_on_texts pada data train
+
+8. ubah hasil dari point 7 menjadi sequence:
+Menggunakan .texts_to_sequences() pada data teks dari data train
+Menggunakan .texts_to_sequences() pada data teks dari data test
+
+9. Lakukan pad_sequences pada data train
+10. lakukan pad_sequences pada data test
+
+11. Build the model
+
+model = Sequential()
+model.add(Embedding(input_dim=5000, output_dim=64, input_length=max_length))
+model.add(Flatten())
+model.add(Dense(100, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(50, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(3, activation='softmax'))
+
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+
+Convert label data train menggunakan to_categorical
+Convert label data test menggunakan to_categorical
+
+Pakai EarlyStopping untuk stop ketika val_loss meningkat :
+
+from keras.callbacks import EarlyStopping
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=1)
+
+latih data train:
+
+model.fit(......)
+
+test_loss, test_acc = model.evaluate(test_sequences, test_label)
+
+print('Test Loss:', test_loss)
+print('Test Accuracy:', test_acc)
