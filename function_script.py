@@ -1,12 +1,12 @@
 import re
+import nltk
 
-# Function to cleaning the data
 def cleansing(text):
     # Make sentence being lowercase
     text = text.lower()
 
     # Remove user, rt, \n, retweet, \t, url, xd
-    pattern_1 = r'(user|retweet|\\t|\\r|url|xd|orang|kalo)'
+    pattern_1 = r'(user|retweet|\\t|\\r|url|xd)'
     text = re.sub(pattern_1, '', text)
 
     # Remove mention
@@ -22,7 +22,7 @@ def cleansing(text):
     text = re.sub(pattern_4, ' ', text)
 
     # Remove single character
-    pattern_5 = r'\b\w{1,3}\b'
+    pattern_5 = r'\b\w{1,1}\b'
     text = re.sub(pattern_5, '', text)
 
     # Remove emoji
@@ -52,12 +52,13 @@ def cleansing(text):
     # Remove multiple whitespace
     pattern_12 = r'(\s+|\\n)'
     text = re.sub(pattern_12, ' ', text)
-
-    # Remove "wkwkwk"
-    pattern_13 = r'\bwk\w+'
-    text = re.sub(pattern_13, '', text)
     
     # Remove whitespace at the first and end sentences
     text = text.rstrip()
     text = text.lstrip()
+
+    # Pattern to look for three or more repetitions of any character, including newlines.
+    pattern_13 = re.compile(r"(.)\1{1,}", re.DOTALL)
+    text = re.sub(pattern_13, r"\1\1", text)
+
     return text
