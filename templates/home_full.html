@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>FLASK ROUTE OPTIONS</h1>
+<head>
+    <title>Home</title>
+    <form>
+    <h2 for="route-selector">What do you want to do with LSTM Model?</h2>
+    <input type="submit" formaction="{{ url_for('clean') }}" value="Input text to clean it and predict the sentiment"> <br><br>
+    <input type="submit" formaction="{{ url_for('upload_file') }}" value="Reads file (.csv), then clean it, predict the sentiment, and view result in JSON format"> <br><br>
+    <input type="submit" formaction="{{ url_for('upload_download_file') }}" value="Submit your file (.csv), clean it automatically, predict the sentiment, and download the result as .csv file"> <br><br>
+    <h2 for="route-selector">What do you want to do with CNN Model?</h2>
+    <input type="submit" formaction="{{ url_for('clean_cnn') }}" value="Input text to clean it and predict the sentiment with CNN"> <br><br>
+    <input type="submit" formaction="{{ url_for('upload_file_cnn') }}" value="Reads file (.csv), then clean it, predict the sentiment with CNN, and view result in JSON format"> <br><br>
+    <input type="submit" formaction="{{ url_for('upload_download_file_cnn') }}" value="Submit your file (.csv), clean it automatically, predict the sentiment with CNN, and download the result as .csv file"> <br><br>
+    <h2 for="route-selector">What do you want to do with Feed Forward Neural Network Model?</h2>
+    <input type="submit" formaction="{{ url_for('clean_ffnn') }}" value="Input text to clean it and predict the sentiment with FFNN"> <br><br>
+    <input type="submit" formaction="{{ url_for('upload_file_ffnn') }}" value="Reads file (.csv), then clean it, predict the sentiment with FFNN, and view result in JSON format"> <br><br>
+    <input type="submit" formaction="{{ url_for('upload_download_file_ffnn') }}" value="Submit your file (.csv), clean it automatically, predict the sentiment with FFNN, and download the result as .csv file"> <br><br>
+  </form>
+</body>
+</html>
